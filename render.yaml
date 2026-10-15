@@ -1,0 +1,14 @@
+# Render Blueprint for Velnor Studio
+services:
+  - type: web
+    name: velnor-studio
+    runtime: node
+    plan: free
+    region: singapore
+    rootDir: velnor-studio
+    buildCommand: npm test
+    startCommand: npm start
+    healthCheckPath: /api/status
+    envVars:
+      - key: NODE_VERSION
+        value: 22
