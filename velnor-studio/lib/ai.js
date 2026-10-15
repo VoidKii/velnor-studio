@@ -18,7 +18,7 @@ function getConfig(env = process.env) {
     return {
       provider,
       key: anthropicKey,
-      model: (env.ANTHROPIC_MODEL || 'claude-sonnet-5-5').trim(),
+      model: (env.ANTHROPIC_MODEL || 'claude-sonnet-4-5').trim(),
       baseUrl: (env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, ''),
     };
   }
