@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>VELNOR STUDIO · Creator packs for short video</title>
+  <meta name="description" content="Turn a video idea into a hook, timestamped script, titles, caption, sound plan and a DaVinci Resolve edit blueprint.">
+  <meta name="theme-color" content="#07060a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307060a'/%3E%3Cpath d='M7 8l9 17 9-17' fill='none' stroke='%238f73ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <aside class="rail" id="rail" aria-label="Your library">
+      <div class="rail-head">
+        <a class="brand" href="/" aria-label="VELNOR STUDIO home">
+          <svg class="brand-mark" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path d="M7 8l9 17 9-17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="brand-name">Velnor Studio</span>
+        </a>
+        <button class="icon-btn rail-close" id="railClose" type="button" aria-label="Close library">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <button class="btn btn-quiet new-btn" id="newBtn" type="button">New pack</button>
+
+      <div class="tabs" role="tablist" aria-label="Library">
+        <button class="tab" role="tab" id="tabProjects" aria-selected="true" aria-controls="libList" type="button">Saved <span class="count" id="countProjects">0</span></button>
+        <button class="tab" role="tab" id="tabHistory" aria-selected="false" aria-controls="libList" type="button">History <span class="count" id="countHistory">0</span></button>
+      </div>
+
+      <label class="search">
+        <span class="sr-only">Search your library</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="searchInput" type="search" placeholder="Search ideas, hooks, titles" autocomplete="off">
+      </label>
+
+      <ul class="lib-list" id="libList" role="tabpanel"></ul>
+
+      <p class="rail-foot">Saved projects and history live in this browser only. Clearing site data removes them.</p>
+    </aside>
+    <div class="scrim" id="scrim" hidden></div>
+
+    <main class="main" id="main">
+      <header class="top">
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open library" aria-controls="rail" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="mode" id="modeBadge" data-mode="loading">Checking server…</div>
+      </header>
+
+      <section class="brief" aria-labelledby="briefTitle">
+        <h1 id="briefTitle">Your idea, cut and ready to film.</h1>
+        <p class="lede">Describe the video. You get a hook, a timed script, titles, a caption, a sound plan and a step-by-step DaVinci Resolve edit.</p>
+
+        <form id="briefForm" novalidate>
+          <div class="field">
+            <label for="idea">Video idea</label>
+            <textarea id="idea" name="idea" rows="3" maxlength="800" placeholder="Example: why old film cameras are making a comeback with Gen Z" required></textarea>
+            <div class="field-meta"><span id="ideaError" class="field-error" role="alert"></span><span id="ideaCount" class="muted">0 / 800</span></div>
+          </div>
+
+          <fieldset class="field">
+            <legend>Platform</legend>
+            <div class="chips" id="platformChips"></div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Tone</legend>
+            <div class="chips" id="toneChips"></div>
+          </fieldset>
+
+          <div class="row">
+            <fieldset class="field">
+              <legend>Duration</legend>
+              <div class="chips" id="durationChips"></div>
+            </fieldset>
+            <div class="field field-language">
+              <label for="language">Language</label>
+              <select id="language" name="language"></select>
+            </div>
+          </div>
+
+          <div class="field field-code" id="codeField" hidden>
+            <label for="accessCode">Access code</label>
+            <input id="accessCode" type="password" autocomplete="off" placeholder="Needed to use this app's AI">
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="generateBtn" type="submit">Generate creator pack</button>
+            <span class="muted" id="demoNote"></span>
+          </div>
+        </form>
+      </section>
+
+      <section class="output" id="output" aria-live="polite" aria-busy="false"></section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
